@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>もみじ旅日記｜2026 日本秋日旅行</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Zen+Old+Mincho:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf4e4;--card:#fffaf0;--ink:#4a3322;--sub:#8a6e55;--ac:#d9602b;--gold:#e0a53a;--night:#1f2a4d;--line:#e8d7b5;--dc:#d9602b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1812;--card:#2a2219;--ink:#f3e6cf;--sub:#c3a98a;--line:#46392a}}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:'Zen Maru Gothic','Hiragino Maru Gothic ProN','PingFang TC','Noto Sans TC','Microsoft JhengHei',sans-serif;line-height:1.6;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:22px 22px}
+#app{max-width:760px;margin:0 auto;padding:12px 14px 96px;position:relative;z-index:2}
+h1,h2,h3{margin:0}
+.hero{border-radius:22px;overflow:hidden;background:linear-gradient(#ffd9a0,#f6a35e 55%,#d9602b);color:#fff;position:relative;padding:20px 18px 0;box-shadow:0 6px 0 #b9491c33}
+.hero h1{font-size:30px;letter-spacing:2px;text-shadow:0 2px 0 #b9491c88}
+.hero p{margin:2px 0 8px;font-size:14px}
+.hero svg{display:block;width:100%;height:auto;margin-top:6px}
+.cd{display:flex;gap:10px;margin:10px 0}
+.cd div{flex:1;background:#fff3;border:2px dashed #fff9;border-radius:14px;text-align:center;padding:6px}
+.cd b{font-size:24px;display:block}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px;margin:14px 0;box-shadow:0 3px 0 var(--line)}
+.bar{height:12px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--ac));transition:width .5s}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button,.btn{font:inherit;cursor:pointer;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:14px;padding:10px 12px;min-height:44px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+button:active{transform:translateY(2px)}
+.pri{background:var(--ac);color:#fff;border-color:#a8431b}
+.dayb{flex-direction:column;align-items:flex-start;border-color:var(--c);text-align:left}
+.dayb small{color:var(--sub)}
+.stamps{display:flex;gap:10px;justify-content:space-around;flex-wrap:wrap}
+.stamp{width:72px;height:72px;border-radius:50%;border:3px double var(--c);color:var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:12px;font-weight:700;transform:rotate(-8deg);opacity:.28;filter:grayscale(1)}
+.stamp.on{opacity:1;filter:none;animation:pop .5s}
+@keyframes pop{from{transform:scale(1.8) rotate(10deg);opacity:0}}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;justify-content:center;background:var(--card);border-top:2px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;max-width:150px;border:0;background:none;flex-direction:column;gap:0;font-size:12px;border-radius:12px}
+nav button.on{background:var(--ac);color:#fff}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0}
+.tabs button{flex:1;white-space:nowrap;border-color:var(--c)}
+.tabs button.on{background:var(--c);color:#fff}
+.dayhead{border-left:8px solid var(--dc);padding-left:10px;margin:10px 0}
+.act{background:var(--card);border:2px solid var(--line);border-left:6px solid var(--dc);border-radius:16px;margin:10px 0;overflow:hidden;animation:slide .35s both}
+@keyframes slide{from{transform:translateY(10px);opacity:0}}
+.ah{display:flex;gap:10px;align-items:center;padding:12px;cursor:pointer}
+.ah .t{flex:1;min-width:0}.ah small{color:var(--sub)}
+.chk{width:30px;height:30px;accent-color:var(--ac);flex:none}
+.done .nm{text-decoration:line-through;opacity:.55}
+.tag{font-size:11px;border-radius:9px;padding:1px 8px;color:#fff;margin-right:4px;display:inline-block}
+.t-plan{background:#4f8a5b}.t-pend{background:#c98a1b}.t-back{background:#6b7fa8}
+.ab{padding:0 14px 14px;border-top:1px dashed var(--line);display:none}
+.act.open .ab{display:block}
+.ab dl{margin:10px 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:14px}
+.ab dt{color:var(--sub)}.ab dd{margin:0;overflow-wrap:anywhere}
+textarea,input{font:inherit;width:100%;border:2px solid var(--line);border-radius:12px;padding:8px;background:var(--bg);color:var(--ink)}
+.leg{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+.leg:last-child{border:0}.leg div{flex:1;min-width:0}
+.row{display:flex;gap:8px;margin:6px 0;align-items:center}
+.row label{flex:1;display:flex;gap:8px;align-items:center}.row input[type=checkbox]{width:22px;height:22px;accent-color:var(--ac);flex:none}
+.leaf{position:fixed;top:-40px;width:22px;height:22px;z-index:1;pointer-events:none;animation:fall linear infinite;opacity:.7}
+@keyframes fall{to{transform:translate(60px,110vh) rotate(540deg)}}
+@media(prefers-reduced-motion:reduce){.leaf{display:none}*{animation:none!important;transition:none!important}}
+.note{font-size:13px;color:var(--sub)}
+
+.hero .fig{margin:10px -18px 0}.hero .fig img{border-radius:0}.hero .fig figcaption{color:#fff;padding:2px 14px 6px}
+.fig{margin:10px 0}.fig img{width:100%;height:auto;display:block;border-radius:16px;background:var(--line);animation:fadein .7s both}
+.fig figcaption{font-size:12px;color:var(--sub);text-align:right}
+@keyframes fadein{from{opacity:0}}
+.mapf{position:relative;overflow:hidden;aspect-ratio:1448/1086;border-radius:18px;border:2px solid var(--line);container-type:inline-size;background:var(--line);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.mapt{position:absolute;inset:0;transform-origin:0 0}
+.mapt img{width:100%;height:100%;display:block;pointer-events:none;-webkit-user-drag:none}
+.hs{position:absolute;margin:0;padding:0;min-height:0;border:0;border-radius:10px;background:transparent;color:#5a2d12;font-size:1.6cqw;font-weight:700;line-height:1;white-space:nowrap;overflow:visible;display:flex;align-items:center;justify-content:center}
+.hs:not(.st)::before{content:"";position:absolute;inset:-1cqw}
+.hs.dim{opacity:.55}
+.hs.on{box-shadow:0 0 0 .5cqw var(--ac),0 0 2.4cqw #ffb347;animation:glow 2s ease-in-out infinite}
+.hs.sel{box-shadow:0 0 0 .6cqw #2b4f9e,0 0 2.4cqw #2b4f9e88}
+.hs:focus-visible{outline:3px solid #2b4f9e;outline-offset:2px}
+@keyframes glow{50%{box-shadow:0 0 0 .5cqw var(--ac),0 0 3.4cqw #ffd27a}}
+.hl{flex-direction:column;gap:0;border-color:var(--line)}.hl small{color:var(--sub)}.hl[disabled]{opacity:.5;cursor:default}
+
+:root{--ttl:#7a3f17;--paper:#fffaf0}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--ttl:#f0b27a;--paper:#2a2219}}
+.cover{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:14px 12px 10px;box-shadow:0 4px 0 var(--line);text-align:center;margin-top:2px}
+.cover .en{letter-spacing:.3em;font-size:10px;font-weight:700;color:var(--ac)}
+.cover h1{font-family:'Zen Old Mincho','Zen Maru Gothic','Hiragino Mincho ProN',serif;font-weight:900;font-size:clamp(28px,9.5vw,42px);line-height:1.15;color:var(--ttl);letter-spacing:.06em;margin:2px 0 0;overflow-wrap:anywhere}
+.cover h1 span{font-size:.7em;margin-right:4px}
+.cover .sub{margin:2px 0 6px;font-size:13px;color:var(--sub)}
+.cover .dt{display:inline-block;font-size:12px;font-weight:700;color:var(--ttl);border:1.5px solid var(--ttl);border-radius:20px;padding:0 12px}
+.frame{position:relative;margin:12px 2px 0;background:#fffdf6;padding:5px;border-radius:6px;box-shadow:0 2px 0 var(--line),0 6px 14px #4a332233}
+.frame::before,.frame::after{content:"";position:absolute;top:-8px;width:56px;height:16px;background:#e8c27aaa;z-index:1}
+.frame::before{left:10px;transform:rotate(-5deg)}.frame::after{right:10px;transform:rotate(4deg)}
+.frame .fig{margin:0}.frame .fig img{border-radius:3px}.frame .fig figcaption{color:#8a6e55;padding:2px 2px 0}
+.tk{display:grid;grid-template-columns:auto 1fr;position:relative;overflow:hidden;margin:12px 0 8px;background:var(--paper);border:2px solid var(--ttl);border-radius:14px}
+.tk-l{padding:10px 14px;display:flex;align-items:center;justify-content:center;text-align:center;border-right:2px dashed var(--line);min-width:96px}
+.tk-l div{line-height:1.2;font-size:12px;color:var(--sub)}.tk-l b{display:block;font-size:26px;color:var(--ac)}
+.tk-r{position:relative;padding:8px 64px 6px 14px}
+.tk-r::before,.tk-r::after{content:"";position:absolute;left:-10px;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--ttl)}
+.tk-r::before{top:-11px}.tk-r::after{bottom:-11px}
+.tk-pct{font-size:13px;margin-bottom:4px}.tk-pct b{font-size:22px;color:var(--ttl)}
+.tk .note{margin:4px 0 0}
+.pm{position:absolute;right:8px;top:50%;width:50px;height:50px;margin-top:-25px;border:2px double var(--ac);border-radius:50%;color:var(--ac);font-size:8px;font-weight:700;line-height:1.3;display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(12deg);opacity:.65;pointer-events:none}
+.go{width:100%}
+.sec{font-size:15px;color:var(--ttl);margin:14px 0 6px;letter-spacing:.1em}
+.pcs{gap:8px}
+.pc{position:relative;display:block;text-align:left;padding:5px 5px 6px;background:#fffdf6;color:#4a3322;border:1px solid var(--line);border-radius:6px;box-shadow:0 2px 0 var(--line);min-height:0}
+.pc:nth-child(odd){transform:rotate(-.8deg)}.pc:nth-child(even){transform:rotate(.8deg)}
+.pc img{width:100%;height:auto;display:block;border-radius:3px;background:var(--line);aspect-ratio:1672/941}
+.pc b{display:block;margin-top:4px;font-size:13px;color:var(--c)}
+.pc small{display:block;font-size:11px;line-height:1.35;color:#7a6049}
+.pcb{position:absolute;right:8px;top:8px;z-index:1;font-size:9px;font-weight:700;color:#fff;background:var(--c);border-radius:8px;padding:0 6px;letter-spacing:.08em}
+.stc{padding:12px;margin:12px 0 8px}
+.stamps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;justify-items:center}
+.stamps .stamp{width:100%;max-width:78px;aspect-ratio:1;height:auto;gap:0;font-size:11px;line-height:1.2;border:2px dashed var(--line);color:var(--sub);opacity:1;filter:none;transform:none;background:transparent;text-align:center}
+.stamps .stamp .si{font-size:20px;filter:grayscale(1);opacity:.35}.stamps .stamp .sn{font-size:9px}
+.stamps .stamp.on{border:3px double var(--c);color:var(--c);background:color-mix(in srgb,var(--c) 10%,transparent);transform:rotate(-6deg);font-weight:700}
+.stamps .stamp.on .si{filter:none;opacity:1}
+
+:root{--stl:#b49474}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--stl:#9a8068}}
+.pc{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start}
+.pc b{margin-top:5px;font-size:13px;line-height:1.3}
+.pc small{flex:1;min-height:2.7em;margin-top:2px;font-size:11px;line-height:1.35}
+.pcb{top:7px;right:7px;font-size:8px;padding:0 5px;letter-spacing:.06em}
+.stamps .stamp{border-color:var(--stl);color:var(--sub)}
+.stamps .stamp .si{filter:grayscale(.4);opacity:.7}
+.stamps .stamp .sn{font-size:10px}
+.tip{display:flex;gap:10px;align-items:flex-start;margin:14px 0 28px;padding:12px 14px;background:#f6ead0;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;color:#6b5039}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .tip{background:#352b1e;color:var(--ink)}}
+.tip .ti{flex:none;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#fff;font:700 13px/20px Georgia,serif;text-align:center;font-style:italic}
+.tip p{margin:0;font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+
+.gh h2{font-size:18px;color:var(--ttl)}
+.g8{margin-top:8px}
+.gch{display:flex;width:100%;text-align:left;justify-content:flex-start;gap:10px;margin:8px 0 0;background:var(--paper);border-color:var(--line)}
+.gch.on{border-color:var(--ac)}.gch .gt{flex:1}.gch small{color:var(--sub);display:block}
+.gb{background:var(--paper);border:2px solid var(--ac);border-top:0;border-radius:0 0 14px 14px;padding:10px 12px;margin-bottom:6px}
+.gs{align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line)}.gs small{color:var(--sub);line-height:1.6;display:block}
+.gs input{margin-top:2px}.gs.dn b{text-decoration:line-through;opacity:.6}
+.gbox{border-radius:12px;padding:8px 12px;margin:8px 0;font-size:13px;line-height:1.65}.gbox ul{margin:4px 0 0;padding-left:18px}
+.gbox.w{background:#fff1e0;color:#6b3a14;border:1px solid #e8b676}.gbox.n{background:#fde8e4;color:#7a2418;border:1px solid #e2a095}.gbox.f{background:#eef3e4;color:#34502a;border:1px solid #b9cfa0}
+.gbox.t{background:#f6ead0;color:#6b5039;border-left:4px solid var(--gold)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .gbox{background:#352b1e;color:var(--ink)}}
+.gp{width:100%;border-collapse:collapse;font-size:13px}.gp td{padding:4px 6px;border-bottom:1px dashed var(--line);vertical-align:top}.gp td:first-child{color:var(--sub)}
+.glk{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.glk .btn{min-height:40px;font-size:13px;padding:6px 10px}
+.gsel button.pri{border-color:#a8431b}
+.taxc{border:3px solid var(--ac);background:color-mix(in srgb,var(--ac) 9%,var(--paper));border-radius:16px;padding:12px;margin:12px 0;box-shadow:0 0 0 4px #ffd9a888}
+.taxc h3{color:var(--ac);font-size:16px;margin-bottom:4px}
+.gres{width:100%;text-align:left;justify-content:flex-start;margin-top:6px;background:var(--paper);border-color:var(--line)}
+nav button{font-size:11px}
+
+.gw{color:var(--ttl)!important;margin-top:2px}
+.gq{border-bottom:1px dashed var(--line);padding:2px 0}.gq summary{cursor:pointer;font-weight:700;font-size:14px;min-height:40px;display:flex;align-items:center}
+.gq p,.gq ul{margin:2px 0 8px;font-size:13px;line-height:1.7}.gq ul{padding-left:18px}
+.gq.tz{background:var(--paper);border:2px solid var(--line);border-radius:12px;padding:2px 12px;margin:6px 0}
+</style><link rel="preload" as="image" href="assets/img/japan-hero.webp" fetchpriority="high"></head><body>
+<div id="leaves" aria-hidden="true"></div>
+<main id="app"><p>載入中…</p></main>
+<nav id="nav"></nav>
+<script>
+/* ===== 旅行資料（與版面分離，可直接編輯）===== */
+const LEAF='<svg viewBox="0 0 24 24"><path d="M12 2l2 5 4-2-1 5 5 1-4 3 3 4-5-1-1 5-3-3-3 3-1-5-5 1 3-4-4-3 5-1-1-5 4 2z" fill="#d9602b"/><path d="M12 22v-9" stroke="#7a3a14" stroke-width="1.5"/></svg>';
+const TRIP={name:'もみじ旅日記',sub:'京都・大阪・伊根｜四天三夜秋日旅行',start:'2026-11-26',
+days:[
+{id:1,date:'11/26',title:'京都初見與夜楓',c:'#d9602b',legs:[['關西國際機場 KIX','京都站','電車','HARUKA 特急（行程圖標示，班次待確認）'],['京都站','京都飯店','待確認','交通方式待確認'],['京都飯店','永觀堂','待確認','交通方式待確認']],
+acts:[
+{id:'1a',t:null,zh:'抵達關西國際機場',ja:'関西国際空港 KIX',st:'plan',desc:'旅程起點，辦理入境後前往京都。',stay:'待確認',tr:'機場出關後搭 HARUKA',q:'Kansai International Airport'},
+{id:'1b',t:null,zh:'搭乘 HARUKA 前往京都',ja:'特急はるか',st:'plan',desc:'直達京都站的特急列車。',stay:'約依車程',tr:'電車（班次、車票待確認）',q:'Kyoto Station'},
+{id:'1c',t:null,zh:'京都飯店 Check-in',ja:'ホテル チェックイン',st:'pend',desc:'飯店名稱與訂房資訊尚待填入。',stay:'待確認',tr:'待確認',q:'Kyoto Station'},
+{id:'1d',t:null,zh:'永觀堂夜楓',ja:'永観堂 ライトアップ',st:'plan',desc:'京都代表性的紅葉名所，夜間點燈賞楓。',stay:'建議 1.5–2 小時',tr:'待確認',q:'永観堂 禅林寺'},
+{id:'1e',t:null,zh:'備案：東寺夜楓',ja:'東寺 夜間特別拝観',st:'back',desc:'若永觀堂不便前往，可改看東寺五重塔夜楓。',stay:'建議 1–1.5 小時',tr:'待確認',q:'東寺 京都'}]},
+{id:2,date:'11/27',title:'東福寺、嵐山與空庭溫泉',c:'#c98a1b',legs:[['京都飯店','東福寺','待確認','交通方式待確認'],['東福寺','嵐山','電車','JR 線（行程圖標示）'],['嵐山','大阪 空庭溫泉','電車','交通方式與轉乘待確認']],
+acts:[
+{id:'2a',t:'06:00',zh:'起床出發',ja:'早起き',st:'plan',desc:'早起避開東福寺人潮。',stay:'—',tr:'—',q:'Kyoto Station'},
+{id:'2b',t:null,zh:'東福寺通天橋賞楓',ja:'東福寺 通天橋',st:'plan',desc:'京都最著名的楓葉海，通天橋視野絕佳。',stay:'建議 1.5 小時',tr:'待確認',q:'東福寺'},
+{id:'2c',t:null,zh:'飯店 Buffet',ja:'ホテル ビュッフェ',st:'pend',desc:'用餐時間與是否含早餐待確認。',stay:'待確認',tr:'—',q:'Kyoto Station'},
+{id:'2d',t:null,zh:'嵐山竹林小徑',ja:'嵐山 竹林の小径',st:'plan',desc:'穿越竹林的經典散步路線。',stay:'建議 1–1.5 小時',tr:'JR 線',q:'竹林の小径 嵐山'},
+{id:'2e',t:null,zh:'空庭溫泉',ja:'空庭温泉 OSAKA',st:'pend',desc:'位於大阪的溫泉設施，含晚餐。營業與入場資訊待確認。',stay:'建議 3 小時',tr:'待確認',q:'空庭温泉 大阪'}]},
+{id:3,date:'11/28',title:'大阪藝術展覽與美食購物',c:'#3f7f8c',legs:[['京都飯店','京都站','待確認','交通方式待確認'],['京都站','大阪站','電車','JR 線（行程圖標示）'],['大阪站','teamLab Botanical Garden','待確認','交通方式待確認'],['teamLab','千房 / 心齋橋','待確認','交通方式待確認']],
+acts:[
+{id:'3a',t:null,zh:'京都飯店 Check-out',ja:'チェックアウト',st:'plan',desc:'退房後前往大阪。',stay:'—',tr:'—',q:'Kyoto Station'},
+{id:'3b',t:null,zh:'前往大阪',ja:'大阪駅へ',st:'plan',desc:'由京都站搭 JR 前往。',stay:'依車程',tr:'電車（JR 線）',q:'Osaka Station'},
+{id:'3c',t:null,zh:'teamLab Botanical Garden Osaka',ja:'チームラボ ボタニカルガーデン 大阪',st:'pend',desc:'長居植物園內的夜間光影互動展。門票與時段待確認。',stay:'建議 2 小時',tr:'待確認',q:'teamLab Botanical Garden Osaka'},
+{id:'3d',t:null,zh:'千房大阪燒',ja:'千房 お好み焼き',st:'pend',desc:'道地大阪燒。分店與訂位待確認。',stay:'建議 1–1.5 小時',tr:'待確認',q:'千房 お好み焼き 大阪'},
+{id:'3e',t:null,zh:'心齋橋購物',ja:'心斎橋',st:'plan',desc:'商店街逛街，格力高跑跑人看板在道頓堀。',stay:'建議 1.5–2 小時',tr:'待確認',q:'心斎橋'},
+{id:'3f',t:null,zh:'HEP FIVE',ja:'HEP FIVE',st:'plan',desc:'梅田的潮流購物中心，紅色摩天輪是地標。',stay:'建議 1 小時',tr:'待確認',q:'HEP FIVE'},
+{id:'3g',t:null,zh:'板前燒肉 一牛',ja:'板前焼肉 一牛',st:'pend',desc:'晚餐燒肉。訂位待確認。',stay:'建議 1.5 小時',tr:'待確認',q:'板前焼肉 一牛 大阪'},
+{id:'3h',t:null,zh:'備案：西本願寺',ja:'西本願寺',st:'back',desc:'京都車站附近寺廟，退房後若有空檔可順道參拜。',stay:'建議 1 小時',tr:'待確認',q:'西本願寺'},
+{id:'3i',t:null,zh:'備案：章魚燒',ja:'たこ焼き',st:'back',desc:'逛心齋橋時隨意品嚐。',stay:'建議 30 分鐘',tr:'步行',q:'たこ焼き 心斎橋'}]},
+{id:4,date:'11/29',title:'伊根灣與梅田購物',c:'#4a6fa5',legs:[['大阪','伊根灣','待確認','交通方式與時間待確認（行程較遠）'],['伊根灣','大阪','電車','行程圖標示「回大阪站」，班次待確認'],['大阪站','梅田 LUCUA / HEP FIVE','步行','距離與時間待確認']],
+acts:[
+{id:'4a',t:null,zh:'伊根灣遊船',ja:'伊根湾めぐり遊覧船',st:'pend',desc:'欣賞舟屋與餵海鷗。交通與船班尚待確認，行程較遠請預留彈性。',stay:'建議 1–2 小時',tr:'待確認',q:'伊根湾めぐり遊覧船'},
+{id:'4b',t:null,zh:'返回大阪',ja:'大阪へ',st:'pend',desc:'回程方式待確認。',stay:'依車程',tr:'電車（待確認）',q:'Osaka Station'},
+{id:'4c',t:null,zh:'梅田 LUCUA／HEP FIVE',ja:'梅田 ルクア / HEP FIVE',st:'plan',desc:'百貨與潮流選物。',stay:'建議 1.5–2 小時',tr:'待確認',q:'LUCUA Osaka'},
+{id:'4d',t:null,zh:'年輕潮流服飾購物',ja:'ファッション ショッピング',st:'plan',desc:'依喜好逛街。',stay:'建議 1.5 小時',tr:'待確認',q:'梅田 ファッション'},
+{id:'4e',t:null,zh:'拉麵或壽司',ja:'ラーメン / 寿司',st:'pend',desc:'行程圖列有神座拉麵、大起水產壽司作為候選，尚未決定。',stay:'建議 1 小時',tr:'待確認',q:'神座 ラーメン 大阪'}]}
+]};
+const ST={plan:['行程圖已列','t-plan'],pend:['待確認','t-pend'],back:['備案','t-back']};
+const PACK=['護照','日圓現金','信用卡','網卡/eSIM','行動電源','充電線與轉接頭','常備藥','保暖外套','好走的鞋','折疊傘'];
+/* ===== 狀態與儲存（localStorage，僅存於此裝置）===== */
+const KEY='momiji-2026-v1';
+let S={tab:'home',day:1,open:null,done:{},notes:{},pack:{},exp:[],gift:[]};
+let saveOK=true;
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+S.tab=S.tab||'home';
+function save(){try{const{done,notes,pack,exp,gift}=S;localStorage.setItem(KEY,JSON.stringify({done,notes,pack,exp,gift}))}catch(e){saveOK=false}}
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const maps=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+const dir=(a,b)=>'https://www.google.com/maps/dir/?api=1&travelmode=transit&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b);
+const real=d=>d.acts.filter(a=>a.st!=='back');
+const dayDone=d=>real(d).every(a=>S.done[a.id]);
+function prog(){const all=TRIP.days.flatMap(real);return[all.filter(a=>S.done[a.id]).length,all.length]}
+/* ===== 畫面 ===== */
+function heroOld(){return`<section class="hero"><h1>もみじ旅日記</h1><p>${TRIP.sub}<br>2026.11.26 – 11.29</p>
+<svg viewBox="0 0 400 130" role="img" aria-label="秋日京都插畫：五重塔與楓葉"><circle cx="300" cy="50" r="34" fill="#fff6" /><g fill="#7a3a14"><rect x="196" y="40" width="8" height="70"/><path d="M170 62h60l-8-10h-44zM176 82h48l-8-10h-32zM182 100h36l-6-9h-24zM185 46h30l-8-12h-14z"/></g><path d="M0 130V108q60-22 120 0t140-4 140 4v26z" fill="#a8431b"/><path d="M0 130v-10q80-18 160 0t240-6v16z" fill="#7a3a14"/>
+<g transform="translate(40 30) scale(1.6)">${LEAF}</g><g transform="translate(330 70) scale(1.3) rotate(20)">${LEAF}</g><g transform="translate(100 70) scale(1) rotate(-20)">${LEAF}</g></svg></section>`}
+function home(){const[a,b]=prog(),pct=b?Math.round(a/b*100):0;
+const st=new Date(TRIP.start+'T00:00:00'),now=new Date(),n=Math.ceil((st-now)/864e5);
+const cd=n>0?`<div><b>${n}</b>天後出發</div>`:n>-4?`<div><b>Day ${Math.min(4,1-n)}</b>旅行中</div>`:`<div><b>完成</b>旅程結束</div>`;
+const today=n<=0&&n>-4?Math.min(4,1-n):1;
+return hero()+`<section class="tk"><div class="tk-l">${cd}</div><div class="tk-r"><div class="tk-pct"><b>${pct}%</b> 行程完成</div><div class="bar"><i style="width:${pct}%"></i></div><p class="note">已完成 ${a} / ${b} 項（不含備案）</p></div><span class="pm" aria-hidden="true">KIX<br>2026.11</span></section>
+<button class="pri go" data-go="${today}">${n<=0&&n>-4?'今日行程':'從 Day 1 開始'}</button>
+<h2 class="sec">旅行明信片</h2><div class="grid pcs">${TRIP.days.map(d=>`<button class="pc" style="--c:${d.c}" data-go="${d.id}" aria-label="Day ${d.id} ${d.date} ${d.title}"><span class="pcb">DAY ${d.id}</span><img src="${IMG[d.id][0]}" width="1672" height="941" alt="" loading="lazy" decoding="async"><b>${d.date}</b><small>${d.title}</small></button>`).join('')}</div>
+<section class="card stc"><h2 class="sec" style="margin-top:0">旅行印章</h2><p class="note">完成當日所有非備案行程即可蓋章</p><div class="stamps">${TRIP.days.map((d,i)=>`<div class="stamp ${dayDone(d)?'on':''}" style="--c:${d.c}"><span class="si">${['🍁','🎋','🏮','⛵'][i]}</span><span>${d.date}</span><span class="sn">${['京都夜楓','嵐山溫泉','大阪美食','伊根灣'][i]}</span></div>`).join('')}</div></section>
+<aside class="tip" role="note"><span class="ti" aria-hidden="true">i</span><p>${saveOK?'資料儲存在此裝置的瀏覽器，不會跨裝置同步；請到「工具箱」匯出備份。':'⚠ 此環境無法儲存，重新整理後資料會消失。'}</p></aside>`}
+function act(d,a){const o=S.open===a.id,[l,c]=ST[a.st];
+return`<article class="act ${o?'open':''} ${S.done[a.id]?'done':''}" style="--dc:${d.c}"><div class="ah" data-open="${a.id}"><input class="chk" type="checkbox" aria-label="標記完成" data-chk="${a.id}" ${S.done[a.id]?'checked':''}><div class="t"><div class="nm"><b>${esc(a.zh)}</b></div><small>${esc(a.ja)}</small><div><span class="tag ${c}">${l}</span><small>${a.t?esc(a.t):'時間待確認'}</small></div></div><span>${o?'▲':'▼'}</span></div>
+<div class="ab"><dl><dt>特色</dt><dd>${esc(a.desc)}</dd><dt>停留</dt><dd>${esc(a.stay)}${a.stay.startsWith('建議')?'（僅供參考）':''}</dd><dt>交通</dt><dd>${esc(a.tr)}</dd><dt>官網/預約</dt><dd>待確認</dd><dt>照片</dt><dd>尚未提供照片收藏功能</dd></dl>
+<a class="btn pri" href="${maps(a.q)}" target="_blank" rel="noopener">🗺 Google Maps</a>
+<p class="note" style="margin-bottom:2px">旅行心得 / 備註</p><textarea rows="3" data-note="${a.id}" placeholder="寫下今天的回憶…">${esc(S.notes[a.id]||'')}</textarea></div></article>`}
+function plan(){const d=TRIP.days[S.day-1];
+return`<div class="tabs">${TRIP.days.map(x=>`<button class="${x.id===S.day?'on':''}" style="--c:${x.c}" data-day="${x.id}">Day ${x.id}</button>`).join('')}</div>
+<div class="dayhead" style="--dc:${d.c}"><h2>${d.date}｜${d.title}</h2><p class="note">不確定的時間、訂位與班次皆標示「待確認」</p></div>${dayImg(d)}${d.acts.map(a=>act(d,a)).join('')}`}
+function trans(){const d=TRIP.days[S.day-1];
+return`<div class="tabs">${TRIP.days.map(x=>`<button class="${x.id===S.day?'on':''}" style="--c:${x.c}" data-day="${x.id}">Day ${x.id}</button>`).join('')}</div>
+<div class="card"><h3>${d.date} 交通路線</h3><p class="note">時間與班次未經查證，請以 Google Maps 即時資訊為準。</p>${d.legs.map(l=>`<div class="leg"><span style="font-size:22px">${l[2]==='電車'?'🚆':l[2]==='步行'?'🚶':'❓'}</span><div><b>${esc(l[0])} → ${esc(l[1])}</b><br><small>${esc(l[2])}｜${esc(l[3])}</small></div><a class="btn" href="${dir(l[0],l[1])}" target="_blank" rel="noopener">導航</a></div>`).join('')}</div>`}
+function tools(){const tot=S.exp.reduce((s,e)=>s+e.amt,0);
+return`<div class="card"><h3>🧳 行李清單</h3>${PACK.map(p=>`<div class="row"><label><input type="checkbox" data-pack="${esc(p)}" ${S.pack[p]?'checked':''}>${esc(p)}</label></div>`).join('')}</div>
+<div class="card"><h3>🎁 伴手禮清單</h3>${S.gift.map((g,i)=>`<div class="row"><label><input type="checkbox" data-gchk="${i}" ${g.d?'checked':''}>${esc(g.n)}</label><button data-gdel="${i}" aria-label="刪除">✕</button></div>`).join('')||'<p class="note">尚無項目</p>'}<div class="row"><input id="gn" placeholder="新增伴手禮"><button data-gadd>加入</button></div></div>
+<div class="card"><h3>💴 花費紀錄</h3><p><b>合計 ¥${tot.toLocaleString()}</b></p>${S.exp.map((e,i)=>`<div class="row"><span style="flex:1">${esc(e.n)}</span><b>¥${e.amt.toLocaleString()}</b><button data-edel="${i}" aria-label="刪除">✕</button></div>`).join('')}<div class="row"><input id="en" placeholder="項目"><input id="ea" type="number" inputmode="numeric" placeholder="日圓" style="max-width:110px"><button data-eadd>記</button></div></div>
+<div class="card"><h3>💾 備份</h3><p class="note">資料只存在這台裝置的瀏覽器。換手機或清除資料前請先匯出。</p><div class="row"><button class="pri" data-export>匯出 JSON</button><button data-import>匯入 JSON</button></div><input id="imp" type="file" accept="application/json,.json" hidden><div id="bk"></div></div>
+<div class="card"><h3>📌 尚未實作</h3><p class="note">照片收藏、跨裝置同步、飯店／訂位資訊欄位、官網連結欄位（目前皆顯示「待確認」）。</p></div>`}
+function render(){const v={home,plan,map:mapView,trans,guide:guideView,tools}[S.tab]();$('#app').innerHTML=v;if(S.tab==='map')mapInit();
+$('#nav').innerHTML=[['home','🏠','首頁'],['plan','🍁','行程'],['map','🗺','地圖'],['trans','🚆','交通'],['guide','🐻','小叮嚀'],['tools','🧰','工具箱']].map(t=>`<button class="${S.tab===t[0]?'on':''}" data-tab="${t[0]}"><span>${t[1]}</span>${t[2]}</button>`).join('')}
+/* ===== 事件 ===== */
+document.addEventListener('click',e=>{const g=k=>e.target.closest('['+k+']');let x;
+if(x=g('data-tab')){S.tab=x.dataset.tab;render();scrollTo(0,0)}
+else if(x=g('data-go')){S.day=+x.dataset.go;S.tab='plan';render();scrollTo(0,0)}
+else if(x=g('data-day')){S.day=+x.dataset.day;S.open=null;render()}
+else if(e.target.dataset.chk){S.done[e.target.dataset.chk]=e.target.checked;save();render()}
+else if(x=g('data-open')){const id=x.dataset.open;S.open=S.open===id?null:id;render()}
+else if(g('data-gadd')){const v=$('#gn').value.trim();if(v){S.gift.push({n:v,d:false});save();render()}}
+else if(x=g('data-gdel')){S.gift.splice(+x.dataset.gdel,1);save();render()}
+else if(e.target.dataset.gchk){S.gift[+e.target.dataset.gchk].d=e.target.checked;save()}
+else if(e.target.dataset.pack){S.pack[e.target.dataset.pack]=e.target.checked;save()}
+else if(g('data-eadd')){const n=$('#en').value.trim(),a=Math.round(+$('#ea').value);if(n&&a>0){S.exp.push({n,amt:a});save();render()}}
+else if(x=g('data-edel')){S.exp.splice(+x.dataset.edel,1);save();render()}
+else if(g('data-export')){exportJSON(JSON.stringify({done:S.done,notes:S.notes,pack:S.pack,exp:S.exp,gift:S.gift,guide:{done:GS.done,term:GS.term}},null,2))}
+else if(g('data-import'))$('#imp').click()});
+document.addEventListener('input',e=>{if(e.target.dataset.note){S.notes[e.target.dataset.note]=e.target.value;save()}});
+/* 備份：匯出優先使用平台 downloads 能力；無法使用時改用下載連結並顯示可複製文字 */
+async function exportJSON(txt){let c=null;try{c=window.claude&&await claude.use('downloads')}catch(e){}
+if(c){try{await c.save({filename:'momiji-backup.json',data:txt});return}catch(e){if(e&&e.code==='declined')return}}
+try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'application/json'}));a.download='momiji-backup.json';document.body.appendChild(a);a.click();a.remove()}catch(e){}
+const b=document.getElementById('bk');if(b)b.innerHTML='<p class="note">若沒有開始下載，請全選下方文字，貼到備忘錄或存成 .json 檔。</p><textarea id="bkt" rows="5" readonly></textarea>',document.getElementById('bkt').value=txt}
+/* 匯入驗證：全部欄位通過才套用；任何錯誤都不改動現有資料 */
+function validateImport(j){const o=x=>x&&typeof x==='object'&&!Array.isArray(x),R={};
+if(!o(j))return'內容不是備份物件';
+for(const k of ['done','notes','pack','exp','gift']){if(j[k]===undefined)continue;const v=j[k];let ok;
+if(k==='done'||k==='pack')ok=o(v)&&Object.values(v).every(x=>typeof x==='boolean');
+else if(k==='notes')ok=o(v)&&Object.values(v).every(x=>typeof x==='string');
+else if(k==='exp')ok=Array.isArray(v)&&v.every(e=>o(e)&&typeof e.n==='string'&&typeof e.amt==='number'&&isFinite(e.amt));
+else ok=Array.isArray(v)&&v.every(g=>o(g)&&typeof g.n==='string'&&typeof g.d==='boolean');
+if(!ok)return'欄位「'+k+'」格式不正確';R[k]=v}
+if(j.guide!==undefined){const v=j.guide;if(!(o(v)&&(v.done===undefined||(o(v.done)&&Object.values(v.done).every(x=>typeof x==='boolean')))&&(v.term===undefined||v.term===''||v.term==='1'||v.term==='2')))return'欄位「guide」格式不正確';R.guide=v}
+return Object.keys(R).length?R:'找不到可匯入的欄位'}
+document.addEventListener('change',e=>{if(e.target.id==='imp'&&e.target.files[0]){const r=new FileReader();r.onload=()=>{let j;try{j=JSON.parse(r.result)}catch(err){alert('匯入失敗：不是有效的 JSON，原有資料未變動');return}
+const v=validateImport(j);if(typeof v==='string'){alert('匯入失敗：'+v+'，原有資料未變動');return}
+const{guide:gv,...rest}=v;Object.assign(S,rest);save();if(gv){if(gv.done)GS.done=gv.done;if(gv.term!==undefined)GS.term=gv.term;gsave()}render();alert(saveOK?'匯入完成（已更新：'+Object.keys(v).join('、')+'）':'已匯入，但此環境無法儲存，重新整理後會消失')};
+r.onerror=()=>alert('匯入失敗：無法讀取檔案，原有資料未變動');r.readAsText(e.target.files[0]);e.target.value=''}});
+/* ===== V2 正式插畫（資源存於發布頁素材庫；[顯示用WebP, 原始PNG, 說明, 寬, 高]）===== */
+const IMG={hero:['assets/img/japan-hero.webp','assets/img/original/japan-hero.png','夕照京都寺町，熊熊與兔兔坐在木平台上',1672,941],
+1:['assets/img/japan-day-01.webp','assets/img/original/japan-day-01.png','京都秋夜紅葉寺院，熊熊持相機、兔兔持手帳',1672,941],
+2:['assets/img/japan-day-02-final.webp','assets/img/original/japan-day-02-final.png','寺院、竹林、小橋與溫泉場景',1672,941],
+3:['assets/img/japan-day-03.webp','assets/img/original/japan-day-03.png','大阪夜景、摩天輪、美食與購物袋',1672,941],
+4:['assets/img/japan-day-04.webp','assets/img/original/japan-day-04.png','海港舟屋、船上熊熊兔兔與海鷗',1672,941],
+map:['assets/img/japan-kansai-map-final.webp','assets/img/original/japan-kansai-map-final.png','關西秋日故事地圖',1448,1086]};
+/* 地圖熱點：座標取自 hotspots.json（原圖像素，1448×1086）；t=對應行程 id，空陣列＝尚未對應 */
+const MW=1448,MH=1086;
+const HOT=[
+{id:'map-01',n:'嵐山',r:[168,190,132,28],t:['2d']},
+{id:'map-02',n:'京都寺院',r:[654,274,144,27],t:['1d','1e','2b'],area:1},
+{id:'map-03',n:'伊根灣',r:[960,63,140,28],t:['4a']},
+{id:'map-04',n:'紅葉寺院',r:[967,257,133,25],t:[]},
+{id:'map-05',n:'空庭溫泉',r:[1304,470,104,25],t:['2e']},
+{id:'map-06',n:'大阪市區',r:[371,501,121,26],t:['3f','4c','4d'],area:1},
+{id:'map-07',n:'道頓堀',r:[727,548,131,25],t:['3d','3e','3i'],area:1},
+{id:'map-08',n:'teamLab',r:[1111,605,139,27],t:['3c']},
+{id:'map-09',n:'關西機場',r:[207,735,142,24],t:['1a','1b']}];
+const ACT={};TRIP.days.forEach(d=>d.acts.forEach(a=>ACT[a.id]={d,a}));
+const hdays=h=>[...new Set(h.t.map(i=>ACT[i].d.id))];
+function fig(k,eager){const[u,o,alt,w,h]=IMG[k];return`<figure class="fig"><a href="${o}" target="_blank" rel="noopener" aria-label="開啟原始高畫質圖片"><img src="${u}" width="${w}" height="${h}" alt="${alt}" ${eager?'fetchpriority="high"':'loading="lazy"'} decoding="async"></a><figcaption>點圖開啟原始高畫質圖</figcaption></figure>`}
+function hero(){return`<section class="cover"><div class="en">MOMIJI TRAVEL DIARY</div><h1><span aria-hidden="true">🍁</span>もみじ旅日記</h1><p class="sub">京都・大阪・伊根｜四天三夜秋日旅行</p><span class="dt">2026.11.26 – 11.29</span><div class="frame">${fig('hero',1)}</div></section>`}
+function dayImg(d){return fig(d.id)}
+function hotPanel(id){const h=HOT.find(x=>x.id===id);if(!h)return'<p class="note">點選地圖標牌或下方清單，查看該區域的景點卡片。</p>';
+return`<h3>${h.n}</h3><p class="note">${h.area?'區域熱點：下列為此區域相關項目，插畫不代表精確位置。':'插畫地圖僅示意，實際位置請以 Google Maps 為準。'}</p>`+h.t.map(i=>{const{d,a}=ACT[i],[l,c]=ST[a.st];return`<div class="act" style="--dc:${d.c};animation:none"><div class="ah" style="cursor:default"><div class="t"><b>${esc(a.zh)}</b><br><small>${esc(a.ja)}</small><div><span class="tag ${c}">${l}</span><small>Day ${d.id}｜${a.t?esc(a.t):'時間待確認'}</small></div><small>${esc(a.stay)}｜${esc(a.tr)}</small></div></div><div class="row" style="padding:0 12px 12px"><button data-hgo="${i}">前往 Day ${d.id} 行程</button><a class="btn pri" href="${maps(a.q)}" target="_blank" rel="noopener">🗺 Google Maps</a></div></div>`}).join('')}
+function mapView(){const[u,,alt,w,h]=IMG.map;
+const hs=HOT.map(o=>{const[x,y,rw,rh]=o.r,pos=`left:${x/MW*100}%;top:${y/MH*100}%;width:${rw/MW*100}%;height:${rh/MH*100}%`;
+if(!o.t.length)return`<span class="hs st" style="${pos}">${o.n}</span>`;
+const on=hdays(o).includes(S.day);return`<button class="hs ${on?'on':'dim'} ${S.hot===o.id?'sel':''}" style="${pos}" data-hot="${o.id}" aria-label="${o.n}，Day ${hdays(o).join('、')}">${o.n}</button>`}).join('');
+return`<div class="tabs">${TRIP.days.map(x=>`<button class="${x.id===S.day?'on':''}" style="--c:${x.c}" data-day="${x.id}">Day ${x.id}</button>`).join('')}</div>
+<p class="note">發光標牌＝Day ${S.day} 的行程區域。這是插畫示意地圖，不是精確導航圖。</p>
+<div id="mapf" class="mapf" role="group" aria-label="關西故事地圖"><div id="mapt" class="mapt"><img src="${u}" width="${w}" height="${h}" alt="${alt}" decoding="async" draggable="false">${hs}</div></div>
+<div class="row"><button data-zm="1" aria-label="放大">＋</button><button data-zm="-1" aria-label="縮小">－</button><button data-zm="0">重設</button></div>
+<p class="note">手機：雙指縮放、放大後單指拖曳；電腦：Ctrl＋滾輪或按鈕。</p>
+<div class="card">${hotPanel(S.hot)}</div>
+<div class="grid">${HOT.map(o=>o.t.length?`<button class="hl" data-hot="${o.id}"><b>${o.n}</b><small>Day ${hdays(o).join('、')}</small></button>`:`<button class="hl" disabled><b>${o.n}</b><small>尚未對應行程</small></button>`).join('')}</div>`}
+let M={s:1,x:0,y:0},PT=new Map(),G=null,SUP=false;
+const mf=()=>document.getElementById('mapf');
+function mapApply(){const f=mf(),t=document.getElementById('mapt');if(!f||!t)return;const w=f.clientWidth,h=f.clientHeight;M.s=Math.min(4,Math.max(1,M.s));M.x=Math.min(0,Math.max(w*(1-M.s),M.x));M.y=Math.min(0,Math.max(h*(1-M.s),M.y));t.style.transform='translate('+M.x+'px,'+M.y+'px) scale('+M.s+')';f.style.touchAction=M.s>1?'none':'pan-y'}
+function mapInit(){mapApply()}
+function zoomAt(cx,cy,ns){ns=Math.min(4,Math.max(1,ns));M.x=cx-(cx-M.x)*ns/M.s;M.y=cy-(cy-M.y)*ns/M.s;M.s=ns;mapApply()}
+document.addEventListener('pointerdown',e=>{if(!(e.target.closest&&e.target.closest('#mapf')))return;SUP=false;PT.set(e.pointerId,{x:e.clientX,y:e.clientY});
+if(PT.size===2){const[a,b]=[...PT.values()];G={d:Math.hypot(a.x-b.x,a.y-b.y)||1,s:M.s,moved:1}}else if(PT.size===1)G={sx:e.clientX,sy:e.clientY,ox:M.x,oy:M.y,moved:0}});
+document.addEventListener('pointermove',e=>{if(!PT.has(e.pointerId)||!G)return;PT.set(e.pointerId,{x:e.clientX,y:e.clientY});const f=mf();if(!f)return;
+if(PT.size===2){const[a,b]=[...PT.values()],r=f.getBoundingClientRect();zoomAt((a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top,G.s*Math.hypot(a.x-b.x,a.y-b.y)/G.d);return}
+const dx=e.clientX-G.sx,dy=e.clientY-G.sy;if(!G.moved&&M.s>1&&Math.hypot(dx,dy)>6){G.moved=1;try{f.setPointerCapture(e.pointerId)}catch(x){}}
+if(G.moved){M.x=G.ox+dx;M.y=G.oy+dy;mapApply()}});
+const pend=e=>{if(!PT.has(e.pointerId))return;PT.delete(e.pointerId);if(G&&G.moved)SUP=true;if(PT.size===1){const p=[...PT.values()][0];G={sx:p.x,sy:p.y,ox:M.x,oy:M.y,moved:1}}else G=null};
+document.addEventListener('pointerup',pend);document.addEventListener('pointercancel',pend);
+document.addEventListener('click',e=>{if(SUP&&e.target.closest&&e.target.closest('#mapf')){e.stopPropagation();e.preventDefault();SUP=false}},true);
+document.addEventListener('wheel',e=>{const f=e.target.closest&&e.target.closest('#mapf');if(!f||!(e.ctrlKey||e.metaKey))return;e.preventDefault();const r=f.getBoundingClientRect();zoomAt(e.clientX-r.left,e.clientY-r.top,M.s*(e.deltaY<0?1.15:1/1.15))},{passive:false});
+window.addEventListener('resize',mapApply);
+document.addEventListener('click',e=>{let x;
+if(x=e.target.closest('[data-hot]')){const id=x.dataset.hot;S.hot=id;render();const el=document.querySelector('.hs[data-hot="'+id+'"]');if(el)el.focus({preventScroll:true});const c=document.querySelector('#app .card');if(c)c.scrollIntoView({block:'nearest'})}
+else if(x=e.target.closest('[data-hgo]')){const i=x.dataset.hgo;S.day=ACT[i].d.id;S.tab='plan';S.open=i;render();setTimeout(()=>{const el=document.querySelector('[data-open="'+i+'"]');if(el)el.scrollIntoView({block:'center'})},50)}
+else if(x=e.target.closest('[data-zm]')){const f=mf();if(!f)return;const v=+x.dataset.zm;if(!v){M={s:1,x:0,y:0};mapApply()}else zoomAt(f.clientWidth/2,f.clientHeight/2,M.s*(v>0?1.5:1/1.5))}});
+document.addEventListener('error',e=>{if(e.target&&e.target.tagName==='IMG')e.target.alt+='（圖片載入失敗，請檢查網路後重新整理）'},true);
+/* ===== V2.2 旅行小叮嚀（獨立儲存鍵 momiji-guide-v1，不動既有資料）===== */
+const GCHK='2026-10-28',GKEY='momiji-guide-v1';
+const CH=[
+{id:'c1',ic:'🧳',n:'行前',t:'行前準備',tip:'熊熊：把「護照、機票、手機」放同一個小包，出門前摸三次。',
+s:[['a1','確認護照','護照需在停留期間有效；部分航空公司建議更長效期，以航空公司公告為準。台灣護照赴日觀光的免簽停留天數，請看外交部領事局日本頁面。'],
+['a2','確認電子機票','記下去程與回程的航班、起飛時間、航廈與行李額度。航廈與關櫃時間依航空公司而定，以電子機票與航空公司通知為準。'],
+['a3','登錄 Visit Japan Web','日本政府官方網站，可預先登錄入境審查與海關申報並取得 QR Code（兩者已合併為同一組）。不是強制，但可省去紙本；同行家人可一起登錄。'],
+['a4','準備網路','買 eSIM／上網卡或確認漫遊方案，出發前先測試能連線。'],
+['a5','旅遊保險與出國登錄','保險是建議項目。外交部建議出國前到領事局網站「出國登錄」留下聯絡資料。'],
+['a6','打包行李','行動電源與鋰電池放隨身行李，不要托運（細節以航空公司公告為準）。重要資料在手機截圖備份。']],
+e:['護照上的拼音與訂位姓名不一致','只靠手機、手機沒電時什麼都出示不了：帶行動電源，QR Code 截圖','沒確認去回程的航廈'],
+no:['不要把行動電源放進托運行李','不要攜帶肉製品、水果等動植物產品入境日本或台灣（見第 4、8 章）'],
+p:[['Could you check my reservation?','予約を確認していただけますか？','可以幫我確認訂位嗎？'],['I have a Visit Japan Web QR code.','Visit Japan WebのQRコードがあります。','我有 Visit Japan Web 的 QR Code。']],
+l:[['外交部領事局（出國登錄）','https://www.boca.gov.tw/'],['Visit Japan Web 官網','https://www.vjw.digital.go.jp/']]},
+{id:'c2',ic:'🚄',n:'機捷',t:'高鐵桃園站到桃園機場',sel:1,tip:'兔兔：先確認是 T1 還是 T2，再上車，就不會白跑一趟。',
+s:[['b1','先確認航廈','看電子機票上的航廈（T1 或 T2）。不要憑印象，也不要只看航空公司名稱。'],
+['b2','搭高鐵到「桃園」站','出閘門後跟著「機場捷運 Airport MRT」指標走（A18 高鐵桃園站）。'],
+['b3','買票或刷卡進站','可用悠遊卡等電子票證，或買單程票。'],
+['b4','搭「普通車」往機場方向','普通車（藍色）每站停。直達車（紫色）平常只停台北車站、新北產業園區、長庚醫院、機場第一與第二航廈，一般不停高鐵桃園站（尖峰有少數加停）。請看月台看板與車廂標示。'],
+['b5','在 A12 或 A13 下車','A12＝機場第一航廈站（T1），A13＝機場第二航廈站（T2）。'],
+['b6','跟指標到出境大廳','到航空公司櫃台前，先在螢幕確認航班號碼。']],
+e:['月台方向看反：往 A19、A20 是桃園市區方向','下錯航廈：A12 與 A13 之間約 2 分鐘車程，可搭機捷到另一站','以為直達車一定停高鐵桃園站'],
+no:['不要在月台奔跑或擋住車門','行李不要堆在車門區'],
+p:[['Which platform goes to the airport?','','往機場是哪個月台？'],['Is this the right train for Terminal 2?','','這班是往第二航廈嗎？']],
+l:[['桃園捷運 時刻表','https://www.tymetro.com.tw/tymetro-new/tw/_pages/travel-guide/timetable-search.php']]},
+{id:'c3',ic:'🛫',n:'出境',t:'台灣出境',tip:'熊熊：登機門會變，眼睛要常看螢幕。',
+s:[['d1','找航空公司報到櫃台','看出境大廳螢幕上的航班號碼。開櫃與關櫃時間依航空公司；建議提早抵達（建議時間不是官方硬性規定）。'],
+['d2','出示護照並托運行李','櫃台會核對護照、訂位與行李重量。行動電源、鋰電池留在隨身。'],
+['d3','拿登機證','確認航班、登機門、登機時間。'],
+['d4','安全檢查','依指示取出電子產品與外套；液體容器規定依機場公告。'],
+['d5','出境證照查驗','護照與登機證備好，依現場指示通關。'],
+['d6','前往登機門','留意廣播與螢幕，提早到登機門附近。']],
+e:['行李超重：現場重新分裝或補付費用（依航空公司）','登機門臨時變更','液體超量被攔下'],
+no:['不要托運行動電源','不要攜帶刀具等違禁品'],
+p:[['Where is the check-in counter for this flight?','','這班飛機的報到櫃台在哪？'],['Could I have an aisle seat?','','可以給我走道座位嗎？']],
+l:[['桃園機場官網','https://www.taoyuan-airport.com/']]},
+{id:'c4',ic:'🛬',n:'入境',t:'日本入境',tip:'兔兔：跟著指標慢慢走，不用急；QR Code 先截圖。',
+s:[['g1','下機，跟指標到「入國審査 Immigration」','關西機場可能要走長廊或搭接駁，慢慢跟著指標。'],
+['g2','準備護照與 QR Code','已登錄 Visit Japan Web 者依現場指示使用自助機或櫃台；未登錄者需填紙本。'],
+['g3','入境審查','提供指紋與臉部照片，可能被問目的、天數與住宿。'],
+['g4','領行李','看螢幕找航班號碼對應的轉盤。'],
+['g5','海關申報（稅關 Customs）','已登錄者掃描 QR；有要申報的物品走申報櫃台。'],
+['g6','出海關到入境大廳','你的 Day 1 規劃搭 HARUKA 往京都，班次與車票待確認。']],
+e:['QR Code 沒截圖：先存圖片','行李遲遲沒出現：找航空公司 Baggage Service','不確定要不要申報：問海關人員'],
+no:['不要攜帶日本禁止或限制入境的物品（例如肉類製品），細節見日本海關','不要幫陌生人帶物品'],
+p:[['Sightseeing.','観光です。','觀光。'],['About four days.','4日間ほど滞在します。','大約停留四天。'],['My baggage has not come out.','荷物が出てきません。','我的行李沒出來。']],
+l:[['日本海關 旅客資訊','https://www.customs.go.jp/english/passenger/index.htm'],['Visit Japan Web','https://www.vjw.digital.go.jp/']]},
+{id:'c5',ic:'🛍',n:'退稅',t:'日本購物退稅（2026/11 新制）',tip:'熊熊：先付含稅價，回程先辦手續再托運。記住這兩句就好。',
+note:'你的旅程（11/26–29）適用新制：2026/11/1 起購買的商品，先付含稅價，離境時海關確認後由店家退款。入境用的 Visit Japan Web 申報與離境退稅確認用途不同，不能混為一談。',
+s:[['h1','找 Tax-free 免稅店','店家有免稅標示；不是每家店都能退稅。'],
+['h2','結帳出示護照','店家會電子登錄購買資料。已登錄 Visit Japan Web 且店家支援時，可能可用免稅 QR，仍建議帶護照。'],
+['h3','先付含稅價','新制櫃台不會直接扣掉 10% 消費稅。'],
+['h4','確認門檻','同一家店、同一天、未稅合計 5,000 日圓以上（官方）。'],
+['h5','登錄退款方式','依店家指示登錄（例如信用卡）。退款由店家或其委託業者處理，不是海關發錢；方式與時程各家不同，不保證當場拿到現金。'],
+['h6','保存收據與商品','商品必須由你帶出日本，且僅限你能隨身帶出的數量。食品、化妝品等不需密封包裝，但在日本吃掉或用掉就不能退稅。'],
+['h7','購買後 90 天內離境並完成海關確認','在機場出境大廳的免稅手續終端機掃護照；關西等七個機場也可用 Visit Japan Web 搭配專用 Wi-Fi（安檢前，需事先設定）。詳見第 7 章。']],
+e:['一張收據只要有一件沒帶出日本，整筆可能都不能退（依觀光廳說明）','拆封試用、吃掉或用掉','把退稅商品先托運了','以為在店裡就拿到錢'],
+no:['不可把免稅商品留在日本或轉售','不可先托運再辦手續（托運後無法取回）','此章是日本退稅；回台灣的免稅額與申報另見第 8 章'],
+p:[['Tax refund, please.','免税手続きをお願いします。','我要辦理退稅。'],['Can I register my credit card for the refund?','返金先にクレジットカードを登録できますか？','可以登錄信用卡作為退款帳戶嗎？'],['Is this item tax-free?','これは免税対象ですか？','這個商品可以退稅嗎？']],
+l:[['日本海關：退稅制度','https://www.customs.go.jp/kaigairyoko/taxrefund_e.html'],['觀光廳：新制說明','https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00028.html'],['觀光廳：旅客 FAQ','https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00027.html']]},
+{id:'c6',ic:'🎎',n:'日本',t:'日本旅行生活',tip:'兔兔：不確定就問，說「すみません」很好用。',
+s:[['i1','準備交通方式','關西常用 ICOCA 等交通 IC 卡；可用範圍以發行方公告為準，也可用 Google Maps 查路線。'],
+['i2','準備支付方式','小店、神社與部分餐廳可能只收現金，隨身帶些日圓。'],
+['i3','留意用餐禮儀','進店等帶位；不把筷子插在飯上，也不用筷子互相傳食物。'],
+['i4','搭電車的禮貌','車內少講電話、背包前抱或放腳邊；手扶梯站立方向各地不同，跟著當地人。'],
+['i5','垃圾自己帶','街上垃圾桶少，帶個小袋子。'],
+['i6','記下緊急聯絡','警察 110；火警與救護車 119；不會日語先說「我是台灣人」。外交部旅外國人緊急服務專線：+886-800-085-095（國際電話，自付費用）。']],
+e:['搭錯車：見下方救援卡','現金不夠：先找附近 ATM 或換刷卡店家','迷路：用本站「交通」頁的 Google Maps 導航'],
+no:['不要在車廂內大聲講電話','不要邊走邊吃（多數景點不允許）'],
+p:[['Excuse me, where is the station?','すみません、駅はどこですか？','請問車站在哪裡？'],['Does this train go to Kyoto?','この電車は京都に行きますか？','這班電車到京都嗎？'],['Please call an ambulance.','救急車を呼んでください。','請幫我叫救護車。']],
+l:[['外交部領事局：日本緊急資訊','https://www.boca.gov.tw/sp-foof-countrycp-02-29-77969-06-1.html']]},
+{id:'c7',ic:'🧾',n:'返台',t:'日本出境返台',tip:'熊熊：免稅商品跟著你走，綠燈亮了才可以去托運。',
+s:[['j1','提早前往機場','官方只說請提早並預留足夠時間，沒有規定時數；京都到關西機場請預留電車延誤的空檔（建議，非硬性規定）。海關確認（含查驗）必須在登機手續前完成。'],
+['tx1','購買日起 90 天內','確認所有免稅商品都在購買日起 90 天內離境。',1],
+['tx2','免稅商品全放隨身袋','未拆封、未使用、還沒托運；掃護照時要帶著全部免稅商品。',1],
+['tx3','先找「免稅手續終端機」','在國際線出境大廳、航空公司報到櫃台之前，先不要排隊托運。',1],
+['tx4','掃護照看結果','綠色＝完成；紅色＝把免稅商品帶到指定海關檢查區查驗。',1],
+['tx5','完成後才托運行李','托運後行李無法取回來辦手續。',1],
+['tx6','確認退款方式','退款由店家或其業者處理，依你在店家登錄的方式；不保證當場拿到現金。',1],
+['j2','航空公司報到與托運','確認登機證與登機門。'],
+['j3','安全檢查與出境審查','依現場指示通關。'],
+['j4','前往登機門','留意廣播與螢幕。']],
+e:['先托運才去辦：行李已無法取回，見救援卡','終端機排長隊：關西機場可改用 Visit Japan Web 與專用 Wi-Fi（要先設定）','紅色結果找不到檢查區：問海關人員'],
+no:['不要在機場打開、食用或使用免稅商品','不要把免稅商品交給別人帶'],
+p:[['Where is the tax-free procedure terminal?','免税手続きの端末はどこですか？','免稅手續終端機在哪裡？'],['I got a red result.','赤い結果が出ました。','我的結果是紅色。']],
+l:[['日本海關：退稅制度','https://www.customs.go.jp/kaigairyoko/taxrefund_e.html'],['海關：線上手續說明','https://www.customs.go.jp/kaigairyoko/tetsuzukishousai_e.html'],['大阪稅關','https://www.customs.go.jp/osaka/english/index.htm']]},
+{id:'c8',ic:'🏠',n:'返家',t:'台灣入境及返家',tip:'兔兔：日本的退稅和台灣的免稅額是兩回事，要分開看。',
+f:['一般行李物品免稅額：新臺幣 35,000 元（2024/6/26 起）','酒類 1.5 公升（滿 18 歲）；菸類擇一：捲菸 200 支、雪茄 25 支、菸絲 1 磅（滿 20 歲）','現金：新臺幣 10 萬元、人民幣 2 萬元；外幣現鈔與有價證券合計等值 1 萬美元，超過須申報','肉類製品等動植物產品：禁止或須檢疫，違規可能被重罰','在日本退到稅，不代表回台灣可免申報；兩套規定分開計算'],
+s:[['k1','下機，依指示入境查驗','依現場指示與航空公司廣播。'],
+['k2','領行李','看螢幕找航班號碼對應的轉盤。'],
+['k3','海關：綠線或紅線','沒有要申報的物品走綠線；有疑問一律走紅線。'],
+['k4','對照下方免稅與申報規定','超過免稅額、菸酒超量、現金超量、動植物產品都要申報。'],
+['k5','回高鐵桃園站','搭機捷普通車到 A18，約 12–16 分鐘（以時刻表為準），再轉高鐵。']],
+e:['把日本買的肉乾、香腸帶回台灣','菸酒是合計計算（包含機場免稅店買的）','買多了沒申報走綠線'],
+no:['不要攜帶肉類製品與新鮮水果入境','有疑問不要走綠線'],
+p:[['I have something to declare.','','我有東西要申報。'],['These are gifts for my family.','','這些是給家人的禮物。']],
+l:[['財政部關務署：旅客免稅規定','https://web.customs.gov.tw/taipei/singlehtml/3392?cntId=cus2_3392_3392_1344'],['防檢署：出國必看不買清單','https://www.aphia.gov.tw/'],['桃園捷運 時刻表','https://www.tymetro.com.tw/tymetro-new/tw/_pages/travel-guide/timetable-search.php']]}];
+const TERM={1:'在「A12 機場第一航廈站」下車。從 A18 搭普通車往機場方向，約 12–16 分鐘（依班次，以時刻表為準）。',2:'在「A13 機場第二航廈站」下車。從 A18 搭普通車往機場方向，約 12–16 分鐘（依班次，以時刻表為準）。A12 與 A13 相隔約 2 分鐘。'};
+const RES=[['😵','搭錯車','先別慌，在下一站下車；用 Google Maps 確認所在位置，搭反方向回到正確站。若是指定席車票（例如 HARUKA）趕不上，先到車站服務櫃台問改搭方式，規則依車票與業者。'],
+['🧳','行李超重','櫃台說超重：可現場重新分裝（鋰電池與行動電源只能隨身），或詢問補付行李費；金額與限制依航空公司。'],
+['🚪','找不到登機門','看登機證與出境螢幕上的 Gate；詢問地勤或服務台；登機門可能變更，留意廣播。'],
+['🧾','退稅商品已托運','官方說明：行李一旦托運就無法取回辦手續。請立刻詢問航空公司櫃台與機場海關人員，但不要預期一定能補辦；補辦不了就可能拿不到退稅。下次先辦手續再托運。'],
+['🔴','終端機出現紅色結果','紅色＝要查驗：把免稅商品帶到指定海關檢查區。商品要在手邊、不要拆封使用。若已托運，請看「退稅商品已托運」。'],
+['⏳','終端機排隊太久','關西機場可改用 Visit Japan Web 搭配專用 Wi-Fi（安檢前，需事先設定好）；無法完成就回到終端機。']];
+let GS={done:{},term:'',ch:null,res:null};
+try{const g=JSON.parse(localStorage.getItem(GKEY)||'{}');if(g.done&&typeof g.done==='object')GS.done=g.done;if(g.term==='1'||g.term==='2')GS.term=g.term}catch(e){}
+function gsave(){try{localStorage.setItem(GKEY,JSON.stringify({done:GS.done,term:GS.term}))}catch(e){}}
+const chDone=c=>c.s.every(x=>GS.done[x[0]]);
+const gstep=x=>`<label class="row gs ${GS.done[x[0]]?'dn':''}"><input type="checkbox" data-gck="${x[0]}" ${GS.done[x[0]]?'checked':''}><span><b>${x[1]}</b><small>${x[2]}</small>${enr(x[0])}</span></label>`;
+function taxCard(){const c=CH[6];return`<section class="taxc"><h3>⚠ 日本回程退稅檢查卡</h3><p style="margin:0 0 6px;font-size:14px"><b>先在出境大廳完成海關確認，再托運行李。</b>適用 2026/11/1 起購買的免稅商品。</p>${c.s.filter(x=>x[3]).map(gstep).join('')}<p class="note" style="margin:6px 0 0">資料來源：日本海關、觀光廳（查核日 ${GCHK}）。此卡勾選會計入第 7 章。</p></section>`}
+function chBody0(c){return`<div class="gb"><div class="gbox t">${c.tip}</div>${c.note?`<div class="gbox w">${c.note}</div>`:''}
+${c.sel?`<div class="gbox f gsel"><b>你的航廈？</b>（以電子機票為準）<div class="row" style="margin-top:6px"><button class="${GS.term==='1'?'pri':''}" data-gterm="1">第一航廈 T1</button><button class="${GS.term==='2'?'pri':''}" data-gterm="2">第二航廈 T2</button></div>${GS.term?`<p style="margin:6px 0 0">${TERM[GS.term]}</p>`:''}</div>`:''}
+${c.s.map(x=>x[3]?'':gstep(x)).join('')}${c.id==='c7'?'<div class="gbox w">上方「退稅檢查卡」的六項也屬於本章，請在卡片中勾選。</div>':''}
+${c.f?`<div class="gbox f"><b>台灣入境免稅與申報（關務署，查核日 ${GCHK}）</b><ul>${c.f.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:''}
+<div class="gbox w"><b>常見錯誤</b><ul>${c.e.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div class="gbox n"><b>禁止事項</b><ul>${c.no.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<table class="gp">${c.p.map(x=>`<tr><td>${x[0]}${x[1]?'<br>'+x[1]:''}</td><td>${x[2]}</td></tr>`).join('')}</table>
+<div class="glk">${c.l.map(x=>`<a class="btn" href="${x[1]}" target="_blank" rel="noopener">🔗 ${x[0]}</a>`).join('')}</div><p class="note" style="margin:6px 0 0">連結資料查核日：${GCHK}。法規與班次可能變動，出發前請再確認。</p></div>`}
+function guideView0(){const tot=CH.reduce((n,c)=>n+c.s.length,0),dn=CH.reduce((n,c)=>n+c.s.filter(x=>GS.done[x[0]]).length,0),cd=CH.filter(chDone).length,pct=Math.round(dn/tot*100);
+return`<section class="card gh"><h2>熊熊兔兔的旅行小叮嚀</h2><p class="note" style="margin:0">はじめての日本旅｜給第一次出國的你。資料查核日 ${GCHK}</p><div class="bar" style="margin-top:8px"><i style="width:${pct}%"></i></div><p class="note" style="margin:4px 0 0">已完成 ${dn} / ${tot} 步、${cd} / 8 章</p><div class="stamps g8">${CH.map((c,i)=>`<div class="stamp ${chDone(c)?'on':''}" style="--c:${['#d9602b','#c98a1b','#3f7f8c','#4a6fa5','#b5443a','#6b8f4a','#8a5aa0','#a8431b'][i]}"><span class="si">${c.ic}</span><span class="sn">${c.n}</span></div>`).join('')}</div></section>
+${taxCard()}<h2 class="sec">八大章節</h2>${CH.map((c,i)=>{const d=c.s.filter(x=>GS.done[x[0]]).length;return`<button class="gch ${GS.ch===c.id?'on':''}" data-gch="${c.id}" aria-expanded="${GS.ch===c.id}"><span style="font-size:22px">${c.ic}</span><span class="gt"><b>${i+1}. ${c.t}</b><small>${d} / ${c.s.length} 步${chDone(c)?'　✅ 已完成':''}</small></span><span>${GS.ch===c.id?'▲':'▼'}</span></button>${GS.ch===c.id?chBody(c):''}`}).join('')}
+<h2 class="sec">情境救援卡</h2>${RES.map((r,i)=>`<button class="gres" data-gres="${i}" aria-expanded="${GS.res===i}"><span>${r[0]}</span><b style="flex:1">${r[1]}</b><span>${GS.res===i?'▲':'▼'}</span></button>${GS.res===i?`<div class="gb"><p style="margin:0;font-size:14px;line-height:1.7">${r[2]}</p></div>`:''}`).join('')}
+<p class="note">離線備查：本頁載入後，教學文字已在手機上，網路不穩時仍可閱讀；但外部連結、圖片與地圖仍需要網路，且需先連網開啟過本頁。勾選進度只存在這台裝置，不會同步，也不在 JSON 備份內。</p>`}
+document.addEventListener('click',e=>{let x;
+if(x=e.target.closest('[data-gch]')){const id=x.dataset.gch;GS.ch=GS.ch===id?null:id;render();const el=document.querySelector('.gch.on');if(el)el.scrollIntoView({block:'start'})}
+else if(x=e.target.closest('[data-gres]')){const i=+x.dataset.gres;GS.res=GS.res===i?null:i;render()}
+else if(x=e.target.closest('[data-gterm]')){GS.term=x.dataset.gterm;gsave();render()}});
+document.addEventListener('change',e=>{if(e.target.dataset&&e.target.dataset.gck){GS.done[e.target.dataset.gck]=e.target.checked;gsave();render()}});
+/* ===== V2.2.1：補強內容、退稅專區、救援卡、離線小抄 ===== */
+const ENR={a1:['在家（出發前）','接著確認電子機票'],a2:['在家','接著登錄 Visit Japan Web'],a3:['在家，用手機或電腦','接著準備網路與保險'],a4:['在家','接著辦保險與出國登錄'],a5:['在家','接著打包'],a6:['在家（出發前一晚）','出發，前往桃園高鐵站'],
+b1:['在家或高鐵車上','搭高鐵到桃園站'],b2:['高鐵桃園站','出閘門，找「機場捷運」指標'],b3:['機捷入口','進閘門，找月台'],b4:['機捷 A18 月台','上車後看站名，到 A12 或 A13 下車'],b5:['機捷車廂','下車跟指標上樓到出境大廳'],b6:['機場站出口','前往航空公司報到櫃台（第 3 章）'],
+d1:['出境大廳 Departures','到櫃台排隊'],d2:['航空公司櫃台前','拿登機證與行李條'],d3:['櫃台','往「安檢 Security」'],d4:['安檢入口','通過後往證照查驗'],d5:['證照查驗 Immigration','進管制區找登機門'],d6:['管制區（候機區）','準時登機'],
+g1:['剛下飛機','跟「入國審査 Immigration」指標'],g2:['入國審査排隊區','到自助機或櫃台'],g3:['入國審査櫃台','往「行李領取 Baggage Claim」'],g4:['行李轉盤','往「海關 Customs」'],g5:['海關','從出口 Exit 出去'],g6:['入境大廳','搭車前往京都（班次待確認）'],
+h1:['任何購物前','進免稅店'],h2:['免稅店門口','到結帳櫃台'],h3:['結帳櫃台','付款並登錄退款方式'],h4:['結帳前','湊到門檻再結帳'],h5:['結帳櫃台','保存收據'],h6:['旅館與行程中','不拆封、不使用，保管好'],h7:['回程機場出境大廳','見第 7 章與退稅專區'],
+i1:['出發前或抵達日本後','買票或儲值'],i2:['出發前','到日本後依需要換錢或提款'],i3:['餐廳門口與座位','用餐後依店家方式結帳'],i4:['月台與車廂','下車前看清站名'],i5:['街上','帶回旅館丟棄'],i6:['出發前','存進手機並截圖'],
+j1:['旅館或前往機場途中','到機場找免稅手續終端機'],tx1:['出發前一晚','打包時分出免稅商品'],tx2:['旅館或機場外','進入出境大廳'],tx3:['出境大廳（報到櫃台之前）','掃護照'],tx4:['終端機前','綠色去報到；紅色去海關檢查區'],tx5:['終端機結果之後','才去航空公司櫃台托運'],tx6:['辦完手續後','保留收據，等店家或業者退款'],j2:['航空公司櫃台','往安檢'],j3:['安檢區','往出境審查'],j4:['出境審查之後','往登機門'],
+k1:['剛下飛機','跟「入境 Arrival／證照查驗」指標'],k2:['行李轉盤','拿行李後到海關'],k3:['海關前（紅線與綠線）','依有無申報物品選線'],k4:['海關前','不確定就走紅線詢問'],k5:['機場捷運站','搭到 A18 轉高鐵']};
+const CHX={
+c1:{q:[['一定要登錄 Visit Japan Web 嗎？','不是強制，但可省下紙本表格；日本政府建議使用。'],['要換日圓嗎？','建議帶一些現金，也可刷卡；小店可能只收現金。'],['要帶轉接頭嗎？','日本插座與台灣相近，多數台灣電器可直接用；三孔接地插頭可能需要轉接。']],sg:[['Departures','出境（出發）'],['Arrivals','入境（抵達）'],['Passport Control','證照查驗']],e:['出發前沒確認電子機票上的航廈','QR Code 只存在雲端，沒網路時打不開：先截圖']},
+c2:{q:[['直達車和普通車差在哪？','直達車（紫色）停站少，平常不停高鐵桃園站；從 A18 請以普通車（藍色）為主。'],['要買哪種票？','悠遊卡等電子票證或單程票，以現場售票機與閘門說明為準。']],sg:[['Airport MRT','機場捷運'],['Express','直達車'],['Commuter','普通車'],['Terminal 1 / Terminal 2','第一／第二航廈'],['Taiwan High Speed Rail','台灣高鐵']],e:['沒留意車廂站名顯示而坐過站','只看到「機場」就上車，沒確認第一或第二航廈']},
+c3:{q:[['行李可以帶多重？','依航空公司與票種，請看電子機票或航空公司通知。'],['登機證上要看什麼？','Gate（登機門）、Boarding Time（登機時間）、Seat（座位）；登機門可能變更，要看螢幕。'],['沒托運行李也要去櫃台嗎？','依航空公司規定；已線上報到者請看航空公司說明。']],sg:[['Check-in','報到'],['Baggage Drop','托運行李'],['Boarding Pass','登機證'],['Gate','登機門'],['Security Check','安全檢查'],['Immigration','證照查驗']],e:['把 Boarding Time 當成起飛時間','以為登機門不會變','行李條遺失：請保留在登機證上']},
+c4:{q:[['入境審查會問什麼？','常見是來做什麼、停留幾天、住哪裡；簡短誠實回答即可。'],['沒登錄 Visit Japan Web 可以嗎？','可以，改填紙本，但可能較花時間。'],['可以帶台灣零食嗎？','含肉類的食品（如肉乾、香腸）日本原則禁止；不確定時主動詢問檢疫人員。']],sg:[['Immigration','入國審査（入境審查）'],['Baggage Claim','行李領取'],['Customs','海關'],['Quarantine','檢疫'],['Exit','出口']],e:['把肉製品留在隨身包內被查到','排隊時忘了先拿出護照與 QR Code']},
+c5:{q:[['藥妝店買的藥和化妝品可以退稅嗎？','新制不再區分一般物品與消耗品；符合條件都能列入，但在日本使用或吃掉就不能退。'],['分很多次買同一家店？','門檻是同店同日的未稅合計；跨日或不同店不合併。'],['忘了辦退稅會怎樣？','沒有完成出境時的海關確認，就拿不到退款。'],['退款多久入帳？','官方沒有統一時程，由店家或退款業者決定，請看店家說明。']],sg:[['Tax-free','免稅'],['Tax Free Shop','免稅店'],['Refund','退款'],['Tax-free procedure terminal','免稅手續終端機'],['Customs','海關']],e:['以為未滿 5,000 日圓也能湊','收據弄丟或護照姓名與登錄不同','在店內拆封試用']},
+c6:{q:[['沒現金怎麼辦？','便利商店等地可能有 ATM，是否支援你的卡依銀行而定；也可先在台灣換匯。'],['坐過站怎麼辦？','在該站下車，用 Google Maps 找反方向電車；車票問題問站務員。'],['要給小費嗎？','日本一般不需要小費。']],sg:[['Exit','出口'],['Entrance','入口'],['Station Staff','站務員'],['Reserved Seat','指定席'],['Non-reserved','自由席']],e:['在禁止拍照處拍照','搭車時沒確認方向與終點站名']},
+c7:{q:[['免稅商品能先托運嗎？','不行。要先在出境大廳的終端機掃護照，且身上要帶著全部免稅商品；托運後就無法取回，手續也無法完成。'],['關西機場在哪裡辦？','第一航廈在 4 樓（終端機 12 台），第二航廈在報到大廳（終端機 4 台）；也可用專用 Wi-Fi 區搭配 Visit Japan Web（大阪稅關公告）。'],['國內線轉國際線呢？','要在最後離開日本的機場辦理（觀光廳）。']],sg:[['Tax Refund Kiosk','退稅終端機'],['Customs Inspection Area','海關檢查區'],['Green / Red','綠色（完成）／紅色（需查驗）'],['Check-in','報到'],['Security Checkpoint','安檢']],e:['以為海關確認完成就等於店家已退款','把免稅商品交給同行家人先去托運']},
+c8:{q:[['日本買的零食可以帶回台灣嗎？','一般零食通常可以，但含肉類、奶類等動植物成分者可能受限；有疑問走紅線。'],['免稅額是每個人算嗎？','每人計算；菸酒有年齡限制，且包含免稅店購買的數量。'],['走紅線會被罰嗎？','主動申報是正確做法；未申報被查獲才可能被沒入或處罰（依關務署規定）。']],sg:[['Arrival','入境'],['Immigration','證照查驗'],['Baggage Claim','行李領取'],['Goods to Declare','有物品要申報（紅線）'],['Nothing to Declare','無需申報（綠線）']],e:['把日本退稅的商品當成台灣免稅額內就不申報','多人合買的物品沒有分清楚歸屬']}};
+const RES2=[
+{i:'🛂',t:'護照遺失',a:'先找警察（派出所、交番或機場警察）報案，請求遺失報案證明；警察不出具時，可自己寫遺失護照說明書。接著聯絡駐大阪辦事處；停留時間短、來不及補發時，可申請「入國證明書」，回台灣後再補辦護照（領事局說明）。',w:'警察 110（緊急）；駐大阪辦事處領務洽詢 +81-6-6227-8623（上班時間）；緊急專用 +81-90-8794-4568（僅限重大急難）；外交部旅外國人緊急服務專線 +886-800-085-095（國際電話，自付費用）',p:[['I lost my passport.','パスポートをなくしました。','我的護照遺失了。'],['I need a police report.','紛失届出証明書をお願いします。','我需要遺失報案證明。']],l:[['領事局：護照遺失補發','https://www.boca.gov.tw/cp-35-7082-91d94-1.html'],['駐大阪辦事處資訊','https://www.boca.gov.tw/sp-foof-countrycp-02-32-cb309-03-1.html']]},
+{i:'✈',t:'錯過班機或航班取消',a:'立刻到航空公司櫃台或找地勤，說明情況並詢問改搭或補票；保留登機證、收據與取消通知（保險理賠與退款常需要）。航班取消時請看航空公司通知；能否改簽與費用依航空公司規定。',w:'航空公司櫃台與客服（電子機票上的聯絡方式）；旅遊保險 24 小時專線（依保單）',p:[['I missed my flight. What are my options?','フライトに乗り遅れました。どうすればいいですか？','我錯過班機了，有什麼選擇？'],['My flight was cancelled. Can I rebook?','フライトが欠航になりました。振替できますか？','我的班機取消了，可以改簽嗎？']],l:[['外交部領事局：回程請提早出發（2011 年提醒）','https://www.boca.gov.tw/cp-56-2793-a38c4-1.html']]},
+{i:'🧳',t:'托運行李未抵達',a:'在離開行李區之前，先到航空公司的行李服務櫃台（Baggage Service）填寫遺失報告，留下旅館地址與電話，保留行李條；詢問送達方式與時間。必要用品的購買收據請保留（理賠依航空公司與保險規定）。',w:'航空公司行李服務櫃台；旅遊保險專線',p:[['My baggage did not arrive.','荷物が届いていません。','我的行李沒有到。'],['Please deliver it to my hotel.','ホテルまで届けてください。','請幫我送到旅館。']]},
+{i:'🧭',t:'在日本迷路',a:'先停下來，不要亂走。開 Google Maps 看自己的位置；問附近店員或車站站務員；找「交番」（警察派出所）；把旅館地址截圖或名片給計程車司機看。',w:'站務員、交番、便利商店店員；緊急情況撥 110；JNTO Japan Visitor Hotline +81-50-3816-2787（24 小時，英、中、韓語）',p:[['I am lost. Where is this?','迷子になりました。ここはどこですか？','我迷路了，這裡是哪裡？'],['Please take me to this address.','この住所までお願いします。','請載我到這個地址。']],l:[['JNTO 旅客熱線','https://www.japan.travel/en/plan/hotline/']]},
+{i:'🔋',t:'手機沒網路或沒電',a:'先開飛航模式省電；到飯店櫃台、車站或便利商店詢問借用或購買行動電源與充電線（依店而異）；改用事先下載的離線地圖與截圖（旅館地址、QR Code）；本頁的離線文字小抄可先貼到備忘錄。',w:'飯店櫃台、車站站務員、便利商店',p:[['Could I charge my phone here?','ここで携帯を充電させてもらえますか？','可以在這裡幫我手機充電嗎？'],['Is there free Wi-Fi?','無料Wi-Fiはありますか？','這裡有免費 Wi-Fi 嗎？']]},
+{i:'🚑',t:'生病或需要緊急協助',a:'緊急狀況撥 119（救護車與火警，免費）；報警撥 110；不會日語先說「我是台灣人」，可轉通譯。非急症或不確定怎麼辦，可打 JNTO Japan Visitor Hotline。同時通知旅遊保險公司，並保留就醫收據。',w:'119／110；JNTO Japan Visitor Hotline +81-50-3816-2787；外交部旅外國人緊急服務專線 +886-800-085-095；駐大阪辦事處緊急專用 +81-90-8794-4568（僅限重大急難）',p:[['Please call an ambulance.','救急車を呼んでください。','請叫救護車。'],['I feel sick. I need a doctor.','具合が悪いです。医者に診てもらいたいです。','我不舒服，需要看醫生。'],['I am Taiwanese.','私は台湾人です。','我是台灣人。']],l:[['JNTO 旅客熱線','https://www.japan.travel/en/plan/hotline/'],['領事局：旅外急難救助專線','https://www.boca.gov.tw/np-87-1.html']]}];
+const TAXZ=[
+['購物時的實際流程','<ol><li>找有免稅標示的免稅店（不是每家都能退稅）。</li><li>結帳前拿出護照。</li><li>店家電子登錄你的購買資料。</li><li>付含稅價。</li><li>依店家指示登錄退款方式。</li><li>保存收據與商品，不拆封使用。</li></ol><p>來源：日本海關、觀光廳。</p>'],
+['護照與身分確認','<p>外國旅客的基本做法是在店內出示護照。誰符合免稅購買資格、店內要出示什麼文件，以觀光廳的「旅客適用對象清單」為準（見下方連結）。Visit Japan Web 的免稅購物功能是否被店家接受，由店家決定，建議仍隨身帶護照。</p><p>來源：觀光廳（新制說明）。</p>'],
+['退款方式由誰決定','<p>退款由免稅店或它委託的業者處理，不是海關發錢；提供哪些方式由店家或業者決定，你在購物時依店家說明登錄。觀光廳 FAQ 列出的方式有銀行轉帳、信用卡、App，或海關確認後在出境口岸領現金，各店不同，不要假設一樣；如何登錄由店家或業者在購物時說明。退款一般在海關確認之後辦理，何時入帳請問店家。</p><p>來源：觀光廳 FAQ。</p>'],
+['哪些情況可能無法退稅','<ul><li>同店同日未稅合計未滿 5,000 日圓。</li><li>商品在日本使用、吃掉或用掉。</li><li>同一張收據（同一筆購買記錄）裡有任何一項沒帶在身上，整筆都可能無法確認（觀光廳資料）。</li><li>超過購買日起 90 天，或沒有完成出境時的海關確認。</li><li>數量超過你能隨身帶出日本的範圍。</li><li>金、白金條等排除項目。</li><li>先托運才辦手續（托運後無法取回）。</li><li>已在日本吃掉部分消耗品卻照常辦手續：請不要在終端機辦，改向海關櫃台報告。</li></ul><p>來源：日本海關、觀光廳。</p>'],
+['回程機場操作步驟','<ol><li>抵達機場，先不要排托運。</li><li>在國際線出境大廳的「免稅手續終端機」掃護照；關西、成田、羽田、中部、福岡、新千歲、那霸另可用 Visit Japan Web 連專用 Wi-Fi（安檢前，需事先設定好）。</li><li>看結果：綠色＝完成；紅色＝帶商品去海關檢查區。</li><li>完成後才去航空公司報到托運。</li></ol><p>關西機場：第一航廈 4 樓有終端機 12 台、檢查區與專用 Wi-Fi 區；第二航廈在報到大廳有終端機 4 台。其他機場位置依各機場公告。來源：大阪稅關關西機場指南。</p>'],
+['退稅商品放在托運行李怎麼辦','<p>觀光廳 FAQ：行李一旦托運就無法取回；辦手續必須先在終端機掃護照，且身上要帶著全部免稅商品，所以托運後就無法完成手續（即使事後出現紅色結果也一樣）。</p><p>手續完成後，商品仍須由你帶出日本；是否可放進托運行李，請依現場海關或航空公司的指示。</p><p>如果已經托運：立刻詢問航空公司櫃台與機場海關人員，但不要預期一定能補辦，補辦不了就可能拿不到退稅。</p><p>來源：觀光廳 FAQ。</p>'],
+['海關要求人工查驗時','<p>終端機顯示紅色時，把免稅商品與護照帶到指定的海關檢查區，商品要未使用、可出示。依人員指示檢查，完成後再報到。排隊需要時間，請預留空檔。</p><p>單價 100 萬日圓以上（未稅）的商品，海關可能要求出示保證書或鑑定書，先準備好會比較順利。海關確認（含查驗）要在登機手續前完成；時間不夠而放棄查驗，視為未完成，航空公司與海關都不會補償。</p><p>來源：日本海關、大阪稅關關西機場指南。</p>'],
+['退款沒有入帳要問誰','<p>先找你購物時拿到的收據、電子郵件或退款登錄頁；退款由店家或其退款業者辦理，請先聯絡他們，並準備收據、護照姓名、購買日與機場確認日期。海關只負責確認商品出境，不負責退款。官方沒有統一入帳日期。</p><p>來源：觀光廳、國稅廳。</p>']];
+const TL=[['日本海關：退稅制度','https://www.customs.go.jp/kaigairyoko/taxrefund_e.html'],['觀光廳：新制說明','https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00028.html'],['觀光廳：旅客 FAQ','https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00027.html'],['大阪稅關：關西機場指南 (PDF)','https://www.customs.go.jp/osaka/about/images/kix_tax%20refund_en.pdf'],['國稅廳：新制概要 (PDF)','https://www.nta.go.jp/publication/pamph/shohi/menzei/201805/pdf/0025003-110_01.pdf'],['觀光廳：旅客傳單（繁體中文 PDF）','https://www.mlit.go.jp/kankocho/tax-free/content/001991258.pdf'],['觀光廳：旅客適用對象清單 (PDF)','https://www.mlit.go.jp/kankocho/tax-free/content/001990247.pdf'],['日本海關：各機場樓層圖','https://www.customs.go.jp/kaigairyoko/taxrefund/map.htm']];
+CH[3].l=[['日本農林水產省：禁止攜帶肉類製品','https://www.maff.go.jp/pps/j/pqaqinfo_en.html'],['Visit Japan Web','https://www.vjw.digital.go.jp/']];
+CH[6].l=[TL[0],TL[3],TL[2]];
+CH[4].l=[TL[0],TL[1],TL[2],TL[5]];
+CH[5].l.push(['JNTO 旅客熱線','https://www.japan.travel/en/plan/hotline/']);
+const enr=id=>{const x=ENR[id];return x?`<small class="gw">📍 現在在：${x[0]}　➜ 完成後：${x[1]}</small>`:''};
+function chBody(c){const x=CHX[c.id]||{},h=chBody0(c);const ex=(x.q?`<div class="gbox f"><b>第一次出國常見疑問</b>${x.q.map(q=>`<details class="gq"><summary>${q[0]}</summary><p>${q[1]}</p></details>`).join('')}</div>`:'')+(x.sg?`<div class="gbox t"><b>現場英文標示</b><table class="gp">${x.sg.map(g=>`<tr><td>${g[0]}</td><td>${g[1]}</td></tr>`).join('')}</table></div>`:'')+(x.e?`<div class="gbox w"><b>更多容易犯錯的情況</b><ul>${x.e.map(t=>`<li>${t}</li>`).join('')}</ul></div>`:'');
+return h.replace('<div class="gbox w"><b>常見錯誤',()=>ex+'<div class="gbox w"><b>常見錯誤')}
+const ALLR=()=>[...RES.map(r=>({i:r[0],t:r[1],a:r[2]})),...RES2];
+function resCard(r,k){const o=GS.res===k;return`<button class="gres" data-gres="${k}" aria-expanded="${o}"><span>${r.i}</span><b style="flex:1">${r.t}</b><span>${o?'▲':'▼'}</span></button>${o?`<div class="gb"><p style="margin:0 0 6px;font-size:14px;line-height:1.7"><b>第一時間：</b>${r.a}</p>${r.w?`<p style="margin:0 0 6px;font-size:14px;line-height:1.7"><b>向誰求助：</b>${r.w}</p>`:''}${r.p?`<table class="gp">${r.p.map(x=>`<tr><td>${x[0]}<br>${x[1]}</td><td>${x[2]}</td></tr>`).join('')}</table>`:''}${r.l?`<div class="glk">${r.l.map(x=>`<a class="btn" href="${x[1]}" target="_blank" rel="noopener">🔗 ${x[0]}</a>`).join('')}</div>`:''}</div>`:''}`}
+const strip=t=>t.replace(/<\/(li|p)>/g,'\n').replace(/<[^>]+>/g,'');
+function taxZone(){return`<h2 class="sec">日本退稅專區（2026/11 新制）</h2><div class="gbox w">官方資料查核日 ${GCHK}。各機場、店家與退款業者的做法可能不同，請以現場說明為準。</div>${TAXZ.map(z=>`<details class="gq tz"><summary>${z[0]}</summary>${z[1]}</details>`).join('')}<div class="glk">${TL.map(x=>`<a class="btn" href="${x[1]}" target="_blank" rel="noopener">🔗 ${x[0]}</a>`).join('')}</div>`}
+function cheatText(){const L=['もみじ旅日記｜旅行小叮嚀 離線小抄（資料查核日 '+GCHK+'）','規則可能變動，出發前請再看官方連結。',''];
+L.push('【日本回程退稅檢查卡】','先在出境大廳完成海關確認，再托運行李。');CH[6].s.filter(x=>x[3]).forEach(x=>L.push((GS.done[x[0]]?'☑ ':'□ ')+x[1]+'：'+x[2]));L.push('');
+L.push('【日本退稅專區】');TAXZ.forEach(z=>L.push('▶ '+z[0]+'\n'+strip(z[1]).trim()));L.push('');
+CH.forEach((c,i)=>{L.push('【'+(i+1)+'. '+c.t+'】');c.s.forEach(x=>{const e=ENR[x[0]];L.push((GS.done[x[0]]?'☑ ':'□ ')+x[1]+'：'+x[2]+(e?'（現在在：'+e[0]+'；完成後：'+e[1]+'）':''))});const k=CHX[c.id]||{};(k.sg||[]).forEach(g=>L.push('  標示 '+g[0]+'＝'+g[1]));c.p.forEach(q=>L.push('  句子 '+q[0]+(q[1]?' / '+q[1]:'')+'＝'+q[2]));L.push('')});
+L.push('【情境救援】');ALLR().forEach(r=>{L.push('▶ '+r.t+'：'+r.a);if(r.w)L.push('  求助：'+r.w);(r.p||[]).forEach(q=>L.push('  '+q[0]+' / '+q[1]+'＝'+q[2]))});
+L.push('','【緊急電話】','日本：警察 110；火警與救護車 119','JNTO Japan Visitor Hotline：050-3816-2787（24 小時，英中韓語）','外交部旅外國人緊急服務專線：+886-800-085-095（國際電話）','駐大阪辦事處緊急專用：+81-90-8794-4568（僅限重大急難）');return L.join('\n')}
+const cheatBlock=()=>`<h2 class="sec">離線文字小抄</h2><div class="gbox t">按「複製」後貼到手機備忘錄，沒有網路也能看。內容含你目前的勾選狀態。</div><div class="row"><button class="pri" data-gcopy>複製離線小抄</button><button data-gsel>顯示並全選</button></div><textarea id="gct" rows="6" readonly style="display:none"></textarea><p class="note" id="gcm"></p><div class="gbox w"><b>關於離線</b>：Claude Artifact 發布頁沒有提供離線快取（Service Worker／PWA）功能，所以本頁沒有真正的離線能力。頁面開啟後，文字已載入手機，網路中斷時仍可繼續看；但關掉頁面後，沒有網路就無法重新開啟。請用上方文字小抄當備份。日後改在支援 PWA 的網站部署時，再補上離線快取。</div><p class="note">小叮嚀的勾選進度存在這台裝置，已納入「工具箱」的 JSON 匯出與匯入，但不會自動跨裝置同步。</p>`;
+function guideView(){let h=guideView0();
+h=h.replace('<h2 class="sec">八大章節</h2>',()=>taxZone()+'<h2 class="sec">八大章節</h2>');
+h=h.replace(/<h2 class="sec">情境救援卡<\/h2>[\s\S]*$/,()=>'<h2 class="sec">情境救援卡（12 張）</h2>'+ALLR().map(resCard).join('')+cheatBlock());return h}
+document.addEventListener('click',e=>{if(e.target.closest('[data-gcopy]')||e.target.closest('[data-gsel]')){const ta=document.getElementById('gct'),m=document.getElementById('gcm');if(!ta)return;const t=cheatText();ta.value=t;ta.style.display='block';const fb=()=>{ta.focus();ta.select();m.textContent='無法自動複製，請長按文字框全選後複製。'};if(e.target.closest('[data-gsel]')){ta.focus();ta.select();m.textContent='已全選，請複製。';return}
+try{navigator.clipboard.writeText(t).then(()=>{m.textContent='已複製（共 '+t.length+' 字）'},fb)}catch(er){fb()}}});
+/* 楓葉飄落 */
+(function(){const L=$('#leaves');for(let i=0;i<9;i++){const d=document.createElement('div');d.className='leaf';d.innerHTML=LEAF;d.style.left=(i*11+Math.random()*8)+'%';d.style.animationDuration=(12+Math.random()*10)+'s';d.style.animationDelay=(-Math.random()*14)+'s';L.appendChild(d)}})();
+render();
+</script></body></html>
