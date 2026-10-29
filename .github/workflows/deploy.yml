@@ -1,0 +1,44 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Safety check (stop if the page still points to Claude-only files)
+        run: |
+          test -f index.html
+          if grep -q "/_blob/" index.html; then echo "index.html still contains Claude artifact image links (/_blob/)"; exit 1; fi
+          for f in assets/img/japan-hero.webp assets/img/japan-day-01.webp assets/img/japan-day-02-final.webp assets/img/japan-day-03.webp assets/img/japan-day-04.webp assets/img/japan-kansai-map-final.webp; do test -f "$f" || { echo "missing $f"; exit 1; }; done
+
+      - uses: actions/configure-pages@v5
+
+      - name: Stage site
+        run: |
+          mkdir _site
+          cp -r index.html assets .nojekyll _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
